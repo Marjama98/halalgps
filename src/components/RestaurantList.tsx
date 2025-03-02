@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import Image from 'next/image';
 import { Restaurant } from "@/types/types";
+import '../app/globals.css';  // Move up one directory, then down into /app
+
 
 interface RestaurantListProps {
   restaurants: Restaurant[];
@@ -26,11 +29,15 @@ const RestaurantList: React.FC<RestaurantListProps> = ({ restaurants }) => {
           className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 cursor-pointer"
           onClick={() => handleRestaurantClick(restaurant)}
         >
-          <img
-            src={restaurant.image}
-            alt={restaurant.name}
-            className="w-full h-40 object-cover rounded-lg mb-4"
-          />
+          <div className="relative w-full h-40 mb-4">
+            <Image
+              src={restaurant.image}
+              alt={restaurant.name}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
+            />
+          </div>
           <h3 className="text-xl font-semibold text-gray-800 mb-2">{restaurant.name}</h3>
           <p className="text-sm text-gray-600">{restaurant.type}</p>
           <p className="text-sm text-gray-500">{restaurant.address}</p>
@@ -51,17 +58,20 @@ const RestaurantList: React.FC<RestaurantListProps> = ({ restaurants }) => {
             onClick={(e) => e.stopPropagation()} // Prevent click from closing the popup
           >
             <h2 className="text-2xl font-semibold">{selectedRestaurant.name}</h2>
-            <img
-              src={selectedRestaurant.image}
-              alt={selectedRestaurant.name}
-              className="w-full h-64 object-cover rounded-lg my-4"
-            />
+            <div className="relative w-full h-64 my-4">
+              <Image
+                src={selectedRestaurant.image}
+                alt={selectedRestaurant.name}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-lg"
+              />
+            </div>
             <p className="text-lg">{selectedRestaurant.type}</p>
-            <p className="text-sm text-gray-600">{selectedRestaurant.address}</p>
-            <p className="text-sm text-yellow-500">{`${selectedRestaurant.rating} ⭐`}</p>
+            <p className="text-lg">{selectedRestaurant.address}</p>
             <button
+              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
               onClick={closePopup}
-              className="mt-4 p-2 bg-red-500 text-white rounded-lg"
             >
               Close
             </button>

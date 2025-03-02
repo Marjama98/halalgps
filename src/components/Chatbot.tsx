@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { FaComments, FaTimes } from 'react-icons/fa';
+import '../app/globals.css';  // Move up one directory, then down into /app
 
 const Chatbot = () => {
   const [userMessage, setUserMessage] = useState('');
